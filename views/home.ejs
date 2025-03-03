@@ -1,0 +1,46 @@
+<%- include('partials/header', { title: 'Home', user: user }) %>
+
+<div class="container mt-5 text-center">
+    <h1 class="display-4 fw-bold">Welcome to Bubble</h1>
+    <p class="lead">Join private, interest-based communities and engage in meaningful interactions.</p>
+
+    <% if (!user) { %>
+        <a href="/signup" class="btn btn-success btn-lg mt-3">Get Started</a>
+    <% } %>
+
+    <!-- Trending Bubbles Section -->
+    <div class="mt-5">
+        <h3 class="fw-bold">🔥 Trending Bubbles</h3>
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Tech Innovators</h5>
+                        <p class="card-text">A bubble for the latest in AI, Web Dev, and Gadgets and more.</p>
+                        <a href="#" class="btn btn-primary btn-sm">Join</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Fitness & Wellness</h5>
+                        <p class="card-text">Join to stay motivated and share workout tips and more.</p>
+                        <a href="#" class="btn btn-primary btn-sm">Join</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Startup Hustlers</h5>
+                        <p class="card-text">Entrepreneurs discussing strategies, growth & funding.</p>
+                        <a href="#" class="btn btn-primary btn-sm">Join</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

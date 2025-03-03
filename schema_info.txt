@@ -1,0 +1,79 @@
+CREATE DATABASE IF NOT EXISTS bubble;
+USE bubble;
+
+-- Users Table
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    bio TEXT,
+    avatar VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Bubbles Table
+CREATE TABLE bubbles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) UNIQUE NOT NULL,
+    description TEXT,
+    rules TEXT,
+    creator_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (creator_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Posts Table
+CREATE TABLE posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    content TEXT NOT NULL,
+    user_id INT NOT NULL,
+    bubble_id INT NOT NULL,
+    is_anonymous BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (bubble_id) REFERENCES bubbles(id) ON DELETE CASCADE
+);
+
+-- Reactions Table (for likes, dislikes, etc.)
+CREATE TABLE reactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    post_id INT NOT NULL,
+    type ENUM('like', 'dislike', 'love', 'laugh', 'sad', 'angry') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
+);
+
+-- Whispers Table (for anonymous replies)
+CREATE TABLE whispers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    post_id INT NOT NULL,
+    user_id INT,
+    content TEXT NOT NULL,
+    is_anonymous BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
+-- Gratitude Wall Table (for positive interactions)
+CREATE TABLE gratitude (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sender_id INT NOT NULL,
+    receiver_id INT NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Indexing for performance optimization
+CREATE INDEX idx_user_email ON users(email);
+CREATE INDEX idx_bubble_name ON bubbles(name);
+CREATE INDEX idx_post_bubble ON posts(bubble_id);
+CREATE INDEX idx_reaction_post ON reactions(post_id);
+CREATE INDEX idx_gratitude_receiver ON gratitude(receiver_id);

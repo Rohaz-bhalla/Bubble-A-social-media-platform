@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Bubble</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">Bubble</a>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h1>Create a Bubble</h1>
+        <form action="/bubbles/create" method="POST">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="rules" class="form-label">Rules</label>
+                <textarea class="form-control" id="rules" name="rules" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Create Bubble</button>
+        </form>
+    </div>
+</body>
+</html>

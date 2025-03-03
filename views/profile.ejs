@@ -1,0 +1,15 @@
+<%- include('partials/header', { title: 'Profile', user: user }) %>
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="mb-3">Profile</h2>
+        <p><strong>Username:</strong> <%= user.username %></p>
+        <p><strong>Email:</strong> <%= user.email %></p>
+        <p><strong>Joined:</strong> <%= new Date(user.created_at).toDateString() %></p>
+        
+        <!-- Edit Profile Button -->
+        <a href="/profile/edit" class="btn btn-primary">Edit Profile</a>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

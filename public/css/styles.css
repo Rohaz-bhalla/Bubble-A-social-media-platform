@@ -1,0 +1,109 @@
+/* General Styles */
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  padding: 1rem 0;
+}
+
+/* Sidebar */
+#sidebar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  left: -250px; /* Start hidden */
+  top: 0;
+  background: #f8f9fa;
+  padding: 15px;
+  transition: left 0.3s ease-in-out;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+#sidebar.active {
+  left: 0;
+}
+
+/* Sidebar Close Button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Dark Mode */
+body.dark-mode {
+  background-color: #121212 !important;
+  color: white !important;
+}
+
+.dark-mode .navbar {
+  background-color: #1e1e1e !important;
+}
+
+.dark-mode .btn-outline-dark {
+  border-color: white !important;
+  color: white !important;
+}
+
+.dark-mode .btn-outline-dark:hover {
+  background-color: white !important;
+  color: black !important;
+}
+
+.dark-mode .navbar-light .navbar-nav .nav-link {
+  color: white !important;
+}
+
+.dark-mode .btn {
+  color: white !important;
+}
+
+.dark-mode a {
+  color: #bbb !important;
+}
+
+.dark-mode a:hover {
+  color: white !important;
+}
+
+.dark-mode #sidebar {
+  background: #333;
+  color: white;
+}
+
+.dark-mode #sidebar a {
+  color: white;
+}
+
+/* Dark mode styles for cards */
+.dark-mode .card {
+    background-color: #222 !important;
+    color: white !important;
+    border: 1px solid #444 !important;
+}
+
+.dark-mode .card a {
+    color: #bbb !important;
+}
+
+.dark-mode .card a:hover {
+    color: white !important;
+}
+
+/* Fix for Bootstrap bg-light in dark mode */
+.dark-mode .bg-light {
+  background-color: #222 !important;
+  color: white !important;
+}
+
+.dark-mode .text-dark {
+  color: white !important;
+}
