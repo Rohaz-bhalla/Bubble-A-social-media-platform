@@ -107,3 +107,41 @@ body.dark-mode {
 .dark-mode .text-dark {
   color: white !important;
 }
+
+
+/* profile */
+
+.profile-card {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+/* Dark Mode for Profile Page */
+.dark-mode .card {
+  background-color: #222;
+  color: white;
+}
+.dark-mode .profile-pic {
+  border: 2px solid white;
+}
+
+
+/* prp sahgi krne k liye..scaling */
+
+.profile-pic-preview {
+  width: 150px;
+  height: 150px;
+  object-fit: cover; /* Ensures the image fills the box without distortion */
+  border-radius: 50%; /* Keeps it circular */
+  border: 2px solid #ddd;
+}

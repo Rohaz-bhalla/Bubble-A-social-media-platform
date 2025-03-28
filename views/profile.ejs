@@ -1,14 +1,17 @@
-<%- include('partials/header', { title: 'Profile', user: user }) %>
+<%- include('partials/header', { title: "Profile" }) %>
 
-<div class="container mt-5">
-    <div class="card shadow-lg p-4">
-        <h2 class="mb-3">Profile</h2>
-        <p><strong>Username:</strong> <%= user.username %></p>
-        <p><strong>Email:</strong> <%= user.email %></p>
-        <p><strong>Joined:</strong> <%= new Date(user.created_at).toDateString() %></p>
-        
-        <!-- Edit Profile Button -->
-        <a href="/profile/edit" class="btn btn-primary">Edit Profile</a>
+<div class="container mt-4">
+    <div class="card profile-card">
+        <div class="card-body text-center">
+            <!-- Profile Picture -->
+            <img src="<%= user.profilePic || '/images/default-avatar.png' %>" class="rounded-circle" width="150" height="150" alt="Profile Picture">
+            
+            <h2 class="mt-3"><%= user.username %></h2>
+            <p>Email: <%= user.email %></p>
+            <p>Member since: <%= new Date(user.created_at).toLocaleDateString() %></p>
+            
+            <a href="/profile/edit" class="btn btn-primary">Edit Profile</a>
+        </div>
     </div>
 </div>
 

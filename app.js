@@ -37,12 +37,27 @@ app.use('/reactions', verifyToken, reactionRoutes);
 app.use('/whisper', verifyToken, whisperRoutes);
 app.use('/gratitude', verifyToken, gratitudeRoutes);
 app.use('/offline', verifyToken, offlineRoutes);
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads/profilePics')));
+app.use("/bubbles", bubbleRoutes);
 
 // Error handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(err.status || 500).json({ error: err.message || 'Something went wrong!' });
+app.use((req, res, next) => {
+    try {
+        if (req.cookies.token) {
+            const decoded = jwt.verify(req.cookies.token, process.env.JWT_SECRET);
+            req.user = decoded; // ✅ Attach user to req
+            res.locals.user = decoded;
+        } else {
+            req.user = null;
+            res.locals.user = null;
+        }
+    } catch (err) {
+        req.user = null;
+        res.locals.user = null;
+    }
+    next();
 });
+
 
 // Start server
 const PORT = process.env.PORT || 3000;

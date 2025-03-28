@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "app.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "/app.js"
+      }
+    ],
+    "env": {
+      "NODE_ENV": "production",
+      "JWT_SECRET": "@jwt_secret",
+      "DATABASE_URL": "@database_url"
+    }
+  }
+  
